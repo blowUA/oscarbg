@@ -1,0 +1,48 @@
+
+[mc.shared.search]
+0=TEMPLATE
+
+[input]
+0=~blowgrow
+
+[input-def]
+0=*
+
+[input2]
+0=/home/blowgrow/blowgrow/blowgrow/templates/oscar/
+1=/home/blowgrow/blowgrow/blowgrow/templates/
+
+[Dir Hist New Right Panel]
+0=/home/blowgrow/v_env
+1=/home/blowgrow/v_env/lib
+2=/home/blowgrow/v_env/lib/python2.7
+3=/home/blowgrow/v_env/lib/python2.7/site-packages
+4=/home/blowgrow/v_env/lib/python2.7/site-packages/oscar
+5=/home/blowgrow/v_env/lib/python2.7/site-packages/oscar/templates
+6=/home/blowgrow
+7=/home/blowgrow/blowgrow
+8=/home/blowgrow/blowgrow/blowgrow
+9=/home/blowgrow/blowgrow/blowgrow/templates
+10=/home/blowgrow/blowgrow/blowgrow/templates/oscar
+
+[cmdline]
+0=OA
+1=mkdir oscar
+2=mv templates ../
+3=mv templates ./blowgrow/
+4=
+
+[Dir Hist New Left Panel]
+0=/home/blowgrow/v_env/include/python2.7
+1=/home/blowgrow/v_env/include
+2=/home/blowgrow/v_env/bin
+3=/home/blowgrow/v_env/lib/python2.7/site-packages
+4=/home/blowgrow/v_env/lib/python2.7
+5=/home/blowgrow/v_env/lib
+6=/home/blowgrow/v_env
+7=/home/blowgrow
+8=/home/blowgrow/blowgrow
+9=/home/blowgrow/blowgrow/blowgrow/templates/oscar
+10=/home/blowgrow/blowgrow/blowgrow/templates/promotions
+11=/home/blowgrow/blowgrow/blowgrow/templates
+12=/home/blowgrow/blowgrow/blowgrow
