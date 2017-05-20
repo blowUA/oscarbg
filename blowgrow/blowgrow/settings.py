@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    #'south',
+    'bootstrap3',
     'growblog',
     'django_comments',
     'tagging', 
@@ -135,9 +137,10 @@ DATABASES = {
     }
 }
 
-ZINNIA_ENTRY_CONTENT_TEMPLATES = [ ('zinnia/_short_entry_detail.html', 'Short entry template'), ]
 
-ZINNIA_ENTRY_DETAIL_TEMPLATES = [ ('zinnia/fullwidth_entry_detail.html', 'Fullwidth template'), ]
+ZINNIA_ENTRY_CONTENT_TEMPLATES = [ ('zinnia/_short_entry_detail.html', 'growblog'), ]
+
+ZINNIA_ENTRY_DETAIL_TEMPLATES = [ ('zinnia/fullwidth_entry_detail.html', 'Growblog'), ]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -198,7 +201,10 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
-STATIC_ROOT = '/home/blowgrow/blowgrow/static/oscar'
+
+STATICFILES_DIRS = ( os.path.join( BASE_DIR, 'static' ), ) 
+
+STATIC_ROOT = 'static/oscar/'
 STATIC_URL = '/static/'
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'

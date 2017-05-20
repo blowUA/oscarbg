@@ -1,0 +1,23 @@
+{
+  "name": "templates",
+  "version": "1.0.0",
+  "description": "blowgrow bootstrap3 templates",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@46.165.236.224/home/git/dev_blowgrow.git"
+  },
+  "keywords": [
+    "blowgrow",
+    "seeds"
+  ],
+  "author": "BlowGrow",
+  "license": "ISC"
+}
