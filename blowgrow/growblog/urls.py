@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 
 from zinnia.urls import include, urls
 

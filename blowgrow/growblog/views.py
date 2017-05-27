@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """Views for Zinnia categories"""
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
