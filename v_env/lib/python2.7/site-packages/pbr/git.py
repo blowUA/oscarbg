@@ -143,6 +143,26 @@ def get_git_short_sha(git_dir=None):
     return None
 
 
+def _clean_changelog_message(msg):
+    """Cleans any instances of invalid sphinx wording.
+
+    This escapes/removes any instances of invalid characters
+    that can be interpreted by sphinx as a warning or error
+    when translating the Changelog into an HTML file for
+    documentation building within projects.
+
+    * Escapes '_' which is interpreted as a link
+    * Escapes '*' which is interpreted as a new line
+    * Escapes '`' which is interpreted as a literal
+    """
+
+    msg = msg.replace('*', '\*')
+    msg = msg.replace('_', '\_')
+    msg = msg.replace('`', '\`')
+
+    return msg
+
+
 def _iter_changelog(changelog):
     """Convert a oneline log iterator to formatted strings.
 
@@ -166,6 +186,7 @@ def _iter_changelog(changelog):
         if not msg.startswith("Merge "):
             if msg.endswith("."):
                 msg = msg[:-1]
+            msg = _clean_changelog_message(msg)
             yield current_release, "* %(msg)s\n" % dict(msg=msg)
         first_line = False
 

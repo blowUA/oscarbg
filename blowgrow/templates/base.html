@@ -36,7 +36,9 @@
   {% endblock %}
 
         {# Additional CSS - specific to certain pages #}
-        {% block extrastyles %}<link rel='stylesheet' href='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Tracking/styles/tracking.css' />{% endblock %}
+        {% block extrastyles %}<link rel='stylesheet' href='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Tracking/styles/tracking.css' />
+        <link rel='stylesheet' href='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Calc/styles/calc.css' />
+        {% endblock %}
 
         {% block extrahead %}{% endblock %}
 
@@ -46,10 +48,9 @@
         {% endblock %}
     </head>
 
-    <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %} "parallax animated fadeIn"{% endblock %}">
+    <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}{% endblock %}">
         {# Main content goes in this 'layout' block #}
-        {% block layout %}layout2{% endblock %}
-
+        {% block layout %}layout{% endblock %}
         {# Scripts loaded from a CDN. #}
         {% block cdn_scripts %}
             <!-- jQuery -->
@@ -63,7 +64,8 @@
         {% endblock %}
 
         {# Additional JS scripts #}
-        {% block extrascripts %}<script type='text/javascript' src='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Tracking/dist/track.min.js'></script>{% endblock %}
+        {% block extrascripts %}<script type='text/javascript' src='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Tracking/dist/track.min.js'></script>
+        {% endblock %}
 
         {# Block for body onload functions #}
         <script type="text/javascript">

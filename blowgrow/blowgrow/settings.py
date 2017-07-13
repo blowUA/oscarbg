@@ -41,6 +41,12 @@ ALLOWED_HOSTS = [ '31.131.16.2']
 # Application definition
 
 INSTALLED_APPS = [
+
+    'admin_tools', 
+    'admin_tools.theming', 
+    #'admin_tools.menu',     
+    #'admin_tools.dashboard', 
+    'admin_tools_zinnia', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,16 +59,31 @@ INSTALLED_APPS = [
     'bootstrap3',
     'growblog',
     'django_comments',
+    'django-bitly',
     'tagging', 
     'mptt', 
     'zinnia',
+    'django_xmlrpc',
     'bootstrap_themes',
+    'django.contrib.admindocs',
+    'django.contrib.staticfiles',
     'django.contrib.flatpages',
     'rest_framework',
     'oscarapi',
+    #'cmsplugin_zinnia',
+    'sekizai',
+    #'sorl.thumbnail',
+    'wiki',
+    'wiki.plugins.attachments',
+    'wiki.plugins.notifications',
+    'wiki.plugins.images',
+    'wiki.plugins.macros',
     'compressor',
     'widget_tweaks',
 ] + get_core_apps()
+
+
+# ['apps.shipping']
 
 
 SITE_ID = 1
@@ -77,14 +98,13 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
- 
     #'oscar.apps.basket.middleware.BasketMiddleware',
 
 'oscarapi.middleware.ApiBasketMiddleWare',
 
 'oscarapi.signals.oscarapi_post_checkout',
  'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-
+ 
 ]
 
 ROOT_URLCONF = 'blowgrow.urls'
@@ -98,26 +118,35 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             OSCAR_MAIN_TEMPLATE_DIR
         ],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                #'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.i18n',
-                'django.contrib.messages.context_processors.messages',
+                #'django.template.context_processors.i18n',
+                'django.contrib.messages.context_processors.messages',                
+                'django.template.context_processors.tz',
+                'django.template.context_processors.static',
+                'django.template.context_processors.media',
                 'oscar.apps.search.context_processors.search_form',
                 'oscar.apps.promotions.context_processors.promotions',
                 'oscar.apps.checkout.context_processors.checkout',
                 'oscar.apps.customer.notifications.context_processors.notifications',
-                'oscar.core.context_processors.metadata',
+                 #'oscar.templates.context_processors.metadata',
                 'zinnia.context_processors.version',
+                'django.template.context_processors.request',
+                'sekizai.context_processors.sekizai',
             ],
             'loaders': [
+            
+                'admin_tools.template_loaders.Loader',
                 'app_namespace.Loader',
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
                 'django.template.loaders.eggs.Loader',
+
             ]
         },
     },
@@ -133,14 +162,39 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'ATOMIC_REQUESTS': True,
     }
 }
 
 
-ZINNIA_ENTRY_CONTENT_TEMPLATES = [ ('zinnia/_short_entry_detail.html', 'growblog'), ]
+# Zinnia settings
 
-ZINNIA_ENTRY_DETAIL_TEMPLATES = [ ('zinnia/fullwidth_entry_detail.html', 'Growblog'), ]
+from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
+from zinnia.settings import PROTOCOL 
+from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS 
+
+XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+
+#ZINNIA_URL_SHORTENER_BACKEND = 'zinnia.views.shortlinks.EntryShortLink'
+#          def backend(entry):
+#            return '%s://%s%s' % (PROTOCOL, #Site.objects.get_current().domain,
+                              #reverse('zinnia_entry_shortlink', #args=[entry.pk]))
+
+
+
+ZINNIA_URL_SHORTENER_BACKEND = 'path.to.your.url.shortener.module'
+
+#Django-wiki settings
+
+WIKI_ACCOUNT_HANDLING = True
+WIKI_ACCOUNT_SIGNUP_ALLOWED = True
+
+from django.core.urlresolvers import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('wiki:get', kwargs={'path': ''})
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
