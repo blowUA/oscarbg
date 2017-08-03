@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     'admin_tools', 
     'admin_tools.theming', 
-    #'admin_tools.menu',     
+    'admin_tools.menu',     
     #'admin_tools.dashboard', 
     'admin_tools_zinnia', 
     'django.contrib.admin',
@@ -59,31 +59,23 @@ INSTALLED_APPS = [
     'bootstrap3',
     'growblog',
     'django_comments',
-    'django-bitly',
+    #'django-bitly',
     'tagging', 
     'mptt', 
     'zinnia',
+    'zinnia_tinymce',
     'django_xmlrpc',
     'bootstrap_themes',
     'django.contrib.admindocs',
-    'django.contrib.staticfiles',
     'django.contrib.flatpages',
     'rest_framework',
     'oscarapi',
-    #'cmsplugin_zinnia',
     'sekizai',
     #'sorl.thumbnail',
-    'wiki',
-    'wiki.plugins.attachments',
-    'wiki.plugins.notifications',
-    'wiki.plugins.images',
-    'wiki.plugins.macros',
     'compressor',
     'widget_tweaks',
 ] + get_core_apps()
 
-
-# ['apps.shipping']
 
 
 SITE_ID = 1
@@ -118,14 +110,14 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             OSCAR_MAIN_TEMPLATE_DIR
         ],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
 
                 'django.template.context_processors.debug',
-                #'django.template.context_processors.request',
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                #'django.template.context_processors.i18n',
+                'django.template.context_processors.i18n',
                 'django.contrib.messages.context_processors.messages',                
                 'django.template.context_processors.tz',
                 'django.template.context_processors.static',
@@ -136,7 +128,6 @@ TEMPLATES = [
                 'oscar.apps.customer.notifications.context_processors.notifications',
                  #'oscar.templates.context_processors.metadata',
                 'zinnia.context_processors.version',
-                'django.template.context_processors.request',
                 'sekizai.context_processors.sekizai',
             ],
             'loaders': [
@@ -172,10 +163,10 @@ DATABASES = {
 
 # Zinnia settings
 
-from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
-from zinnia.settings import PROTOCOL 
-from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS 
+#from django.contrib.sites.models import Site
+#from django.core.urlresolvers import reverse
+#from zinnia.settings import PROTOCOL 
+#from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS 
 
 #XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
@@ -186,7 +177,7 @@ from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 
 
 
-ZINNIA_URL_SHORTENER_BACKEND = 'path.to.your.url.shortener.module'
+#ZINNIA_URL_SHORTENER_BACKEND = 'path.to.your.url.shortener.module'
 
 #Django-wiki settings
 
@@ -256,7 +247,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 
-STATICFILES_DIRS = ( os.path.join( BASE_DIR, 'static' ), ) 
+#STATICFILES_DIRS = ( os.path.join( BASE_DIR, 'static' ), ) 
 
 STATIC_ROOT = 'static/oscar/'
 STATIC_URL = '/static/'

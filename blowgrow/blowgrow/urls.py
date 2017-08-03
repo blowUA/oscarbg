@@ -19,7 +19,7 @@ from oscar.app import application
 from oscarapi.app import application as api
 from zinnia.urls  import include, url
 #from growblog.urls import include, url
-from growblog import views
+#from growblog import views
 
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^admin/tools/', include('admin_tools.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include(application.urls)),
+    url(r'^$', templates.promotion.home.html, name='home'),
     url(r'^redactor/', include('redactor.urls')),
     url(r'^growblog/', include('zinnia.urls')), 
     url(r'^comments/', include('django_comments.urls')),
