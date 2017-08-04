@@ -13,11 +13,8 @@
     {% else %}
         <link rel="stylesheet" type="text/css" href="{% static "oscar/css/styles.css" %}" />
     {% endif %}
-    <link rel="stylesheet" type="text/css" href="{% static "oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.css" %}" />
+    <link rel="stylesheet" href="{% static "oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "oscar/css/datetimepicker.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "zinnia/theme/css/screen.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "wiki/theme/css/screen.css" %}" />
-
 {% endblock %}
 
 {% block layout %}
@@ -29,11 +26,10 @@
         <div class="page_inner">
             <div class="row">
                 {% include "partials/brand.html" %}
-                {% include "partials/otsledit.html" %}
-                {% include "growblog/zinnia/tags/categories.html" %}
                 {# Mini-basket wrapped in a block so some templates can now display it #}
-                {% block mini_basket %}{% include "partials/mini_basket.html" %}{% endblock %}</div>
-           
+                {% block mini_basket %}{% include "partials/mini_basket.html" %}{% endblock %}
+            </div>
+        </div>
         {% block navigation %}
             {% include "partials/nav_primary.html" %}
         {% endblock %}
@@ -41,7 +37,7 @@
 
     {# Main content of page - other layout templates may override this block #}
     {% block content_wrapper %}
-        <div class="container-fluid page" style="background-color: black !important;">
+        <div class="container-fluid page">
             <div class="page_inner">
                 {% block breadcrumbs %}{% endblock %}
                 {% block header %}
@@ -89,12 +85,6 @@
 
     <script src="{% static "oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js" %}" type="text/javascript" charset="utf-8"></script>
     <script src="{% static "oscar/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.all.js" %}" type="text/javascript" charset="utf-8"></script>
-    <script type='text/javascript' src='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Tracking/dist/track.min.js'></script>
-    <script type='text/javascript' src="{% static "zinnia/theme/js/jquery.js" %}"></script>
-    <script type='text/javascript' src="{% static "wiki/js/jquery.min.js" %}"></script>
-    <script type='text/javascript' src="{% static "wiki/js/respond.min.js" %}"></script>
-    <script type='text/javascript' src="{% static "wiki/js/typehead.min.js" %}"></script>
-    
 {% endblock %}
 
 {% block extrascripts %}

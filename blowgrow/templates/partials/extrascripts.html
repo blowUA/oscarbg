@@ -2,20 +2,3 @@
     This file exists so you can easily add your own Javascript without
     having to fork layout.html etc. Instead, just override this file.
 {% endcomment %}
-{% extends 'admin/base.html' %} 
-{% load staticfiles %} 
-{% block javascripts %}
-    {{ block.super }} 
-<script type="text/javascript" src="{% static 'app/js/action.js' %}"></script>
- 
-{% endblock %}
- 
-{% block extrahead %} 
-<link rel="shortcut icon" href="{% static 'app/img/favicon.ico' %}" /> 
-
-{% endblock %}
- 
-{% block stylesheets %} 
-
-    {{ block.super }} 
-{% endblock %}

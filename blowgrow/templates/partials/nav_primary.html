@@ -33,12 +33,12 @@
 
 
         <div class="navbar-collapse primary-collapse collapse">
-            {% block navbar-header %}
-                <ul id="browse" class="nav navbar-nav pull-right">
-                    <li class="active {% if expand_dropdown %}open{% endif %}">
+            {% block nav_dropdown %}
+                <ul id="browse" class="nav navbar-nav">
+                    <li class="dropdown active {% if expand_dropdown %}open{% endif %}">
                         <a href="#" class="dropdown-toggle" {% if not expand_dropdown %} data-toggle="dropdown"{% endif %}>
                             {% trans "Browse store" %}
-                            <b class="inline"></b>
+                            <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" data-navigation="dropdown-menu">
                             {% category_tree depth=2 as tree_categories %}
@@ -69,8 +69,7 @@
                     {% endblock %}
                 </ul>
             {% endblock %}
-            
-           <!-- <h1><a href="{% url ''  %}">{{ entry }}</a> -->
+            {% include "partials/search.html" %}
         </div><!-- /navbar-collapse -->
     </div>
 </div><!-- /navbar -->

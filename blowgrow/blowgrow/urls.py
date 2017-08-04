@@ -20,43 +20,19 @@ from oscarapi.app import application as api
 from zinnia.urls  import include, url
 #from growblog.urls import include, url
 #from growblog import views
-
+from novaposhta import views
 
 urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^admin/tools/', include('admin_tools.urls')),
+   #url(r'^admin/tools/', include('admin_tools.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include(application.urls)),
-    url(r'^$', templates.promotion.home.html, name='home'),
+    url(r'^', include(application.urls)),
     url(r'^redactor/', include('redactor.urls')),
+    urlpatterns += i18n_patterns(
+url(r'^nova-poshta/', include('novaposhta.urls', namespace='nova-poshta')),
+)
     url(r'^growblog/', include('zinnia.urls')), 
     url(r'^comments/', include('django_comments.urls')),
     url(r'^tinymce/filebrowser/', include('zinnia_tinymce.urls')),
     url(r'^api/', include(api.urls)),
-]
-
-
-from django.contrib.sitemaps.views import index 
-from django.contrib.sitemaps.views import sitemap 
-from zinnia.sitemaps import AuthorSitemap 
-from zinnia.sitemaps import CategorySitemap 
-from zinnia.sitemaps import EntrySitemap 
-from zinnia.sitemaps import TagSitemap 
-
-sitemaps = { 
-    'tags': TagSitemap, 
-    'blog': EntrySitemap, 
-    'authors': AuthorSitemap, 
-    'categories': CategorySitemap 
-    
-    } 
-    
-urlpatterns += [ 
-    url(r'^sitemap.xml$', 
-    index, 
-    {'sitemaps': sitemaps}), 
-    url(r'^sitemap-(?P<section>.+)\.xml$', 
-    sitemap, 
-    {'sitemaps': sitemaps},
-    name='django.contrib.sitemaps.views.sitemap'),
 ]

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    #'apps.novaposhta',
     #'south',
     'bootstrap3',
     'growblog',
@@ -72,11 +73,26 @@ INSTALLED_APPS = [
     'oscarapi',
     'sekizai',
     #'sorl.thumbnail',
+    'novaposhta',
     'compressor',
     'widget_tweaks',
-] + get_core_apps()
+] + get_core_apps([ 'novaposhta' ])
 
 
+
+OSCAR_DASHBOARD_NAVIGATION += [
+    {
+        'label': 'Прочие',
+        'icon': 'icon-gift',
+        'children': [
+            {
+                'label': 'Новая почта',
+                'url_name': 'dashboard:novaposhta',
+            
+             }    
+        ]
+    }
+]
 
 SITE_ID = 1
 
@@ -110,7 +126,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             OSCAR_MAIN_TEMPLATE_DIR
         ],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
 
@@ -161,31 +177,6 @@ DATABASES = {
 }
 
 
-# Zinnia settings
-
-#from django.contrib.sites.models import Site
-#from django.core.urlresolvers import reverse
-#from zinnia.settings import PROTOCOL 
-#from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS 
-
-#XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
-
-#ZINNIA_URL_SHORTENER_BACKEND = 'zinnia.views.shortlinks.EntryShortLink'
-#          def backend(entry):
-#            return '%s://%s%s' % (PROTOCOL, #Site.objects.get_current().domain,
-                              #reverse('zinnia_entry_shortlink', #args=[entry.pk]))
-
-
-
-#ZINNIA_URL_SHORTENER_BACKEND = 'path.to.your.url.shortener.module'
-
-#Django-wiki settings
-
-WIKI_ACCOUNT_HANDLING = True
-WIKI_ACCOUNT_SIGNUP_ALLOWED = True
-
-from django.core.urlresolvers import reverse_lazy
-LOGIN_REDIRECT_URL = reverse_lazy('wiki:get', kwargs={'path': ''})
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
