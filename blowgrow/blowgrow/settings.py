@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from oscar.defaults import *
-from oscar import OSCAR_MAIN_TEMPLATE_DIR
-from oscar import get_core_apps
-from zinnia import apps
+
 
 
 """
@@ -19,6 +16,11 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from oscar.defaults import *
+from oscar import OSCAR_MAIN_TEMPLATE_DIR
+from oscar import get_core_apps
+
+
 
 location = lambda x: os.path.join(os.path.dirname(os.path.realpath(__file__)), '.', x)
 
@@ -30,6 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = '4ahvh9i&o(j617bh-qlrxw=ov!8!$x-h-4(al0pfw76z(o+zmk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,55 +47,37 @@ INSTALLED_APPS = [
 
     'admin_tools', 
     'admin_tools.theming', 
-    'admin_tools.menu',     
-    #'admin_tools.dashboard', 
-    'admin_tools_zinnia', 
-    'django.contrib.admin',
+    'admin_tools.menu',    
+    #'admin_tools.dashboard',  
     'django.contrib.auth',
+    'django.contrib.sites',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    #'apps.novaposhta',
-    #'south',
+    'django.contrib.humanize',
+    #'django_nyt.models',
     'bootstrap3',
-    'growblog',
     'django_comments',
     #'django-bitly',
     'tagging', 
     'mptt', 
-    'zinnia',
-    'zinnia_tinymce',
-    'django_xmlrpc',
+    #'django_xmlrpc',
     'bootstrap_themes',
-    'django.contrib.admindocs',
+    #'django.contrib.admindocs',
     'django.contrib.flatpages',
     'rest_framework',
     'oscarapi',
     'sekizai',
     #'sorl.thumbnail',
-    'novaposhta',
+    #'novaposhta',
     'compressor',
     'widget_tweaks',
-] + get_core_apps([ 'novaposhta' ])
+] + get_core_apps()
 
 
-
-OSCAR_DASHBOARD_NAVIGATION += [
-    {
-        'label': 'Прочие',
-        'icon': 'icon-gift',
-        'children': [
-            {
-                'label': 'Новая почта',
-                'url_name': 'dashboard:novaposhta',
-            
-             }    
-        ]
-    }
-]
 
 SITE_ID = 1
 
@@ -108,10 +93,9 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'oscar.apps.basket.middleware.BasketMiddleware',
 
-'oscarapi.middleware.ApiBasketMiddleWare',
-
-'oscarapi.signals.oscarapi_post_checkout',
- 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'oscarapi.middleware.ApiBasketMiddleWare',
+    'oscarapi.signals.oscarapi_post_checkout',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
  
 ]
 
@@ -120,7 +104,7 @@ ROOT_URLCONF = 'blowgrow.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': 'django.template.backends.django.DjangoTemplates', 
         'DIRS': [
             location('templates'),
             os.path.join(BASE_DIR, 'templates'),
@@ -130,31 +114,48 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
 
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.i18n',
-                'django.contrib.messages.context_processors.messages',                
-                'django.template.context_processors.tz',
-                'django.template.context_processors.static',
-                'django.template.context_processors.media',
-                'oscar.apps.search.context_processors.search_form',
-                'oscar.apps.promotions.context_processors.promotions',
-                'oscar.apps.checkout.context_processors.checkout',
-                'oscar.apps.customer.notifications.context_processors.notifications',
-                 #'oscar.templates.context_processors.metadata',
-                'zinnia.context_processors.version',
-                'sekizai.context_processors.sekizai',
-            ],
-            'loaders': [
-            
-                'admin_tools.template_loaders.Loader',
-                'app_namespace.Loader',
-                'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader',
-                'django.template.loaders.eggs.Loader',
+              #  'django.template.context_processors.debug',
+               # 'django.template.context_processors.request',
+               # 'django.contrib.auth.context_processors.auth',
+                #'django.template.context_processors.i18n',
+                #'django.contrib.messages.context_processors.messages',                
+               # 'django.template.context_processors.tz',
+                #'django.template.context_processors.static',
+               # 'django.template.context_processors.media',
+                #'oscar.apps.search.context_processors.search_form',
+                #'oscar.apps.promotions.context_processors.promotions',
+                #'oscar.apps.checkout.context_processors.checkout',
+                #'oscar.apps.customer.notifications.context_processors.notifications',
+              #  'oscar.templates.context_processors.metadata',
+                #'zinnia.context_processors.version',
+                #'sekizai.context_processors.sekizai',
 
-            ]
+            "django.contrib.auth.context_processors.auth",
+            "django.contrib.auth.context_processors.auth",
+            "django.template.context_processors.request",
+            "django.template.context_processors.debug",
+            "django.template.context_processors.i18n",
+            "django.template.context_processors.media",
+            "django.template.context_processors.static",
+            "django.contrib.messages.context_processors.messages",
+            # Oscar specific
+            'oscar.apps.search.context_processors.search_form',
+            'oscar.apps.promotions.context_processors.promotions',
+            'oscar.apps.checkout.context_processors.checkout',
+            'oscar.core.context_processors.metadata',
+            'oscar.apps.customer.notifications.context_processors.notifications',
+            'oscar.core.context_processors.metadata',
+            'oscar.apps.customer.notifications.context_processors.notifications',
+            ],
+            #'loaders': [
+            
+             #   'admin_tools.template_loaders.Loader',
+            #    'app_namespace.Loader',
+             #   'django.template.loaders.filesystem.Loader',
+              #  'django.template.loaders.app_directories.Loader',
+              #  'django.template.loaders.eggs.Loader',
+              #   "admin_tools.template_loaders.Loader"
+           # ]
         },
     },
 ]

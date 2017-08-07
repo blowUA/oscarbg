@@ -1,15 +1,25 @@
-# -*- coding: utf-8 -*- 
+from oscar.apps.shipping import abstract_models
+from oscar.core.loading import is_model_registered
 
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from oscar.apps.shipping.abstract_models import AbstractOrderAndItemCharges
+__all__ = []
 
 
-class StandardMethod(AbstractOrderAndItemCharges):
-    """Модель с обычным набором атрибутов"""
+if not is_model_registered('shipping', 'OrderAndItemCharges'):
+    class OrderAndItemCharges(abstract_models.AbstractOrderAndItemCharges):
+        pass
 
-    class Meta(AbstractOrderAndItemCharges.Meta):
-        verbose_name = _('Shipping method')
-        verbose_name_plural = _('Shipping methods')
+    __all__.append('OrderAndItemCharges')
 
-from oscar.apps.shipping.models import *  # noqa
+
+if not is_model_registered('shipping', 'WeightBased'):
+    class WeightBased(abstract_models.AbstractWeightBased):
+        pass
+
+    __all__.append('WeightBased')
+
+
+if not is_model_registered('shipping', 'WeightBand'):
+    class WeightBand(abstract_models.AbstractWeightBand):
+        pass
+
+    __all__.append('WeightBand')

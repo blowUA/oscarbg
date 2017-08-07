@@ -1,5 +1,8 @@
-from oscar.apps.shipping import config
+from django.apps import AppConfig
+from django.utils.translation import ugettext_lazy as _
 
 
-class ShippingConfig(config.ShippingConfig):
-    name = 'apps.shipping'
+class ShippingConfig(AppConfig):
+    label = 'shipping'
+    name = 'oscar.apps.shipping'
+    verbose_name = _('Shipping')
